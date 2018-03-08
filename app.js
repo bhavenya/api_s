@@ -10,7 +10,9 @@ var cors = require('cors');
 var json2csv = require('json2csv');
 var fs = require('fs');
 
+
 var cassandrar = require ('./routes/cassandrar');
+var visualize = require ('./routes/visualize');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -33,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/cassandrar',cassandrar);
+app.use('/visualize',visualize);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

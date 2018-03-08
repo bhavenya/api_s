@@ -8,6 +8,7 @@ var fs = require('fs');
 var jsonexport = require('jsonexport');
 var path = require ('path');
 
+
 var resolve = require('path').resolve
 
 
@@ -16,19 +17,23 @@ var config = require('config.json')('./api-data.json');
 
 
 router.get('/:year', function(req, res, next) {
-  var tempyear = req.params.year;
-  var year = tempyear;
-  if(year){
-    cassandra.getByYear(year, function(err,rows){
-      if (err){
+  var yearPred = parseInt(req.params.year,10);
+  var yearLabel = parseInt(yearPred + 5,10);
+  var params = [yearPred,yearLabel];
+
+  if(yearPred)
+  {
+    cassandra.getByYear(params, function(err,rows){
+      if (err)
+      {
         res.json(err);
-      }else {
-
-          var train=JSON.parse(JSON.stringify(rows));
-
-
-          var array_features = [];
-          var array_countries = [];
+      }
+      else
+      {
+        var train=JSON.parse(JSON.stringify(rows));
+        console.log(train);
+        var array_features = [];
+        var array_countries = [];
 
         for(var i=0; i<train.length;i++)
         {
@@ -65,8 +70,10 @@ router.get('/:year', function(req, res, next) {
         }
         headerString += 'Stability,\n'
 
-        fs.writeFile('/test/train.csv',headerString, (error) =>
+        //var filePath = `../${obj.outputDirectory}`;
+          fs.writeFile('/test/train.csv',headerString, (error) =>
         {
+          console.log(error);
           if (err)
           {
             throw err;
@@ -84,25 +91,27 @@ router.get('/:year', function(req, res, next) {
                   if((train[r].country_code === array_countries[p]) && (train[r].feature_name === array_features[q]))
                     {
                      finalresultString += train[r].value;
-
                      break;
                   }
                 }
                 finalresultString += ',';
 
               }
-              finalresultString += train[p].stability + ',';
+                //if ((train[p].country_code === array_countries[p]) && (train[p].year === yearPred)){
+              finalresultString += train[p].TJ_lables + ',';
+            //}
               finalresultString = finalresultString.replace(/'/g, '');
               finalresultString += '\n';
             }
 
             fs.appendFile('/test/train.csv',finalresultString, (error) =>
             {
+              console.log(error);
               if (err) throw err;
               else
               {
-                var filepath = resolve('../../test/train.csv')
-                //var filepath = path.join(__dirname,'/train.csv'); // arti chk
+                //var filePath = resolve( '/../../test/train.csv')
+                var filepath = path.join(__dirname,'/train.csv'); // arti chk
                 res.send(filepath);
                 console.log('The file has been saved!');
               }
