@@ -74,9 +74,8 @@ router.get('/:year', function(req, res, next) {
         }
 
 
-        console.log('tain no='+ train.length);
-        console.log('country no='+ array_countries.length);
-        console.log('stability no='+ array_stability.length);
+        console.log('Fetching Data...');
+
 
         var headerString = 'Year,Country_Code,';
         for(var i=0; i<array_features.length;i++)
