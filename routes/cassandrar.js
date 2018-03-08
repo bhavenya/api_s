@@ -74,8 +74,6 @@ router.get('/:year', function(req, res, next) {
         }
 
 
-        console.log('Fetching Data...');
-
 
         var headerString = 'Year,Country_Code,';
         for(var i=0; i<array_features.length;i++)
