@@ -17,7 +17,7 @@ router.get('/:year', function(req, res, next) {
   console.log('am in router');
 
   var visualYear = parseInt(req.params.year,10);
-  
+
 
   if(visualYear)
   {

@@ -9,12 +9,14 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var json2csv = require('json2csv');
 var fs = require('fs');
+var path = require('path');
+global.appRoot = path.resolve(__dirname);
 
 
 var cassandrar = require ('./routes/cassandrar');
 var visualize = require ('./routes/visualize');
 var index = require('./routes/index');
-var users = require('./routes/users');
+
 
 var app = express();
 app.use(cors());
@@ -33,7 +35,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/cassandrar',cassandrar);
 app.use('/visualize',visualize);
 

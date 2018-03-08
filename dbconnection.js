@@ -4,7 +4,7 @@ var connection = mysql.createPool({
   host: 'localhost',
   user:'root',
   password:'password',
-  database: 'cassandra'
+  database: 'mse-proj01_development'
 });
 
 module.exports = connection;
