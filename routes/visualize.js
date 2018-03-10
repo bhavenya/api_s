@@ -8,20 +8,12 @@ var fs = require('fs');
 var jsonexport = require('jsonexport');
 var path = require ('path');
 
-
-
-
 var config = require('config.json')('./api-data.json');
 
-router.get('/:year', function(req, res, next) {
-  console.log('am in router');
-
-  var visualYear = parseInt(req.params.year,10);
-
-
-  if(visualYear)
+router.get('/', function(req, res, next) {
+  if(req)
   {
-    visualize.visualByYear(visualYear, function(err,result){
+    visualize.visualByYear(function(err,result){
       if (err)
       {
         res.json(err);
@@ -37,7 +29,7 @@ router.get('/:year', function(req, res, next) {
           }
           else
           {
-            res.send(' File is ready!')
+            res.send(' File is ready!' + file)
             console.log('Json File saved');
 
           }
