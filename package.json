@@ -14,6 +14,7 @@
     "debug": "^2.6.9",
     "express": "~4.15.5",
     "express-csv": "^0.6.0",
+    "flat-to-nested": "^1.1.0",
     "jade": "~1.11.0",
     "json-2-csv": "^2.1.2",
     "json2csv": "^3.11.5",
