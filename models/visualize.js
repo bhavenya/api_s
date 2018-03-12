@@ -3,7 +3,7 @@ var db = require('../dbconnection')
 
 var visualize = {
   visualByYear: function (callback) {
-    db.query('SELECT s.year,c.name,s.TJ_labels, B.KNN_bucket,B.LR_value from stabilities AS s JOIN countries AS c ON s.country_id = c.id JOIN bucketizations AS B on b.year = s.year', function(err, rows) {
+    db.query('SELECT B.year,c.name, B.KNN_bucket,B.LR_value, s.TJ_labels from bucketizations AS B JOIN countries AS c ON B.country_id = c.id JOIN stabilities AS s ON s.year = B.year AND s.country_id = B.country_id', function(err, rows) {
         if (err) {
             callback(err, null);
         } else

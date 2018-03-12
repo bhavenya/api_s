@@ -116,7 +116,7 @@ router.get('/:year', function(req, res, next) {
             else
             {
               var filepath = path.join (appRoot + '/Output/train.csv');
-              res.send(filepath + finalresultString);
+              res.send(filepath);
               console.log('The file has been saved!');
             }
           });
