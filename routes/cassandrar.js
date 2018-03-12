@@ -53,23 +53,14 @@ router.get('/:year', function(req, res, next) {
           }
         }
 
-
         array_features.sort();
-
-        //remove commas from feature names
-        // for(var i=0; i<array_features.length;i++)
-        // {
-        //     array_features[i] = array_features[i].toString().replace(/,/g,'');
-        // }
-
-
 
         for(var j=0; j<train.length;j++)
         {
           if(array_countries.indexOf(train[j].country_code) == -1) // if isn't already in the array
           {
             array_countries.push(train[j].country_code);
-            array_stability.push(train[j].TJ_lables);
+            array_stability.push(train[j].TJ_labels);
           }
         }
 

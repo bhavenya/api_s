@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
         res.json(err);
       }
       else{
-        
+
         var train = JSON.parse(JSON.stringify(result));
 
         var array_years = [];
@@ -60,9 +60,9 @@ router.get('/', function(req, res, next) {
                 if ((train[k].name === array_countries[i]) && (train[k].year === array_years[j]))
                 {
                   var stabiltyArg = new Object();
-                  stabiltyArg.TJ_Val = train[k].TJ_lables;
-                  stabiltyArg.KNN_Val = train[k].TJ_lables;
-                  stabiltyArg.LR_Val = train[k].TJ_lables;
+                  stabiltyArg.TJ_Val = train[k].TJ_labels;
+                  stabiltyArg.KNN_Val = train[k].KNN_bucket;
+                  stabiltyArg.LR_Val = train[k].LR_value;
                   yearArg.stabilities.push(stabiltyArg);
                   break;
                 }
