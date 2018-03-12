@@ -19,6 +19,7 @@
         }
         else{
 
+          var file = JSON.stringify(result,null,'\t');
 
           var train = JSON.parse(JSON.stringify(result));
 
@@ -33,7 +34,7 @@
 
 
           var country_array = new Array(); // empty array
-           for ( var i=0; i<train.length;i++ )
+          for ( var i=0; i<train.length;i++ )
           {
               if (country_array.indexOf(train[i].name) == -1)  // if year is not in array yet
               {
@@ -47,21 +48,17 @@
               });
             }
           }
+          res.send(file);
 
-          var file = JSON.parse(JSON.stringify(country_array));
+          // fs.writeFile('/tableau/tableau.json',file, (err) => {
+          // if (err){
+          //   throw err;
+          // }
+          // else
+          // {
 
-
-          fs.writeFile('/tableau/tableau.json',file, (err) => {
-          if (err){
-            throw err;
-          }
-          else
-          {
-            res.send(' File is ready!' )
-            console.log('Json File saved');
-          }});
-
-
+            //console.log('Json File saved');
+          //}});
         }
       });
     }
