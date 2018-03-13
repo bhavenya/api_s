@@ -68,9 +68,8 @@ router.get('/:year', function(req, res, next) {
           }
         }
 
-console.log(array_stabilityKNN);
 
-        var headerString = 'Year,Country_Code,';
+        var headerString = 'Country_Code,Year,';
         for(var i=0; i<array_features.length;i++)
         {
           headerString += array_features[i].toString().replace(/,/g,'');
@@ -91,7 +90,7 @@ console.log(array_stabilityKNN);
             var finalresultString = '';
             for(var p=0;p<array_countries.length;p++)
             {
-              finalresultString += train[p].year + ',' + array_countries[p] + ','
+              finalresultString += (array_countries[p] + ',' + train[p].year + ',')
               for(var q=0;q<array_features.length;q++)
               {
                 for(var r=0;r<train.length;r++)
