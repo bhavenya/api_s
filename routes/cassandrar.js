@@ -44,6 +44,8 @@ router.get('/:year', function(req, res, next) {
         var array_features = [];
         var array_countries = [];
         var array_stability = [];
+        var array_stabilityKNN = [];
+         var array_stabilityLR = [];
 
         for(var i=0; i<train.length;i++)
         {
@@ -61,10 +63,12 @@ router.get('/:year', function(req, res, next) {
           {
             array_countries.push(train[j].country_code);
             array_stability.push(train[j].TJ_labels);
+            array_stabilityKNN.push(train[j].KNN_bucket);
+            array_stabilityLR.push(train[j].LR_value);
           }
         }
 
-
+console.log(array_stabilityKNN);
 
         var headerString = 'Year,Country_Code,';
         for(var i=0; i<array_features.length;i++)
@@ -72,7 +76,7 @@ router.get('/:year', function(req, res, next) {
           headerString += array_features[i].toString().replace(/,/g,'');
           headerString += ',';
         }
-        headerString += 'Stability,\n'
+        headerString += 'Stability,KNN_Value,LR_Value\n'
 
 
 
@@ -102,7 +106,7 @@ router.get('/:year', function(req, res, next) {
 
               }
 
-              finalresultString += array_stability[p] + ',';
+              finalresultString += (array_stability[p] +',' + array_stabilityKNN[p]+ ',' + array_stabilityLR[p]+ ',');
 
               finalresultString = finalresultString.replace(/'/g, '');
               finalresultString += '\n';
